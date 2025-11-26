@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jadwal Sepak Bola</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button
+      class="theme-toggle"
+      onclick="toggleTheme()"
+      aria-label="Toggle Dark Mode"
+    >
+      🌙
+    </button>
+
+    <div class="container">
+      <header>
+        <h1>Jadwal Sepak Bola</h1>
+        <p>Data diambil dari API Football</p>
+        <div class="api-indicator">
+          <div class="api-dot"></div>
+          <span>API Connected</span>
+        </div>
+      </header>
+
+      <div class="api-info">
+        <strong>📡 Last Update:</strong> <span id="lastUpdate">-</span> |
+        <strong>💡 Tips:</strong> Klik kartu pertandingan untuk melihat detail
+        lengkap
+      </div>
+
+      <div class="filter-bar">
+        <div>
+          <label for="leagueFilter">Liga:</label>
+          <select id="leagueFilter">
+            <option value="all">Semua Liga</option>
+            <option value="Premier League">Premier League</option>
+            <option value="La Liga">La Liga</option>
+            <option value="Serie A">Serie A</option>
+            <option value="Bundesliga">Bundesliga</option>
+            <option value="Liga 1">Liga 1 Indonesia</option>
+          </select>
+        </div>
+        <div>
+          <label for="dateFilter">Tanggal:</label>
+          <input type="date" id="dateFilter" />
+        </div>
+        <div>
+          <label for="statusFilter">Status:</label>
+          <select id="statusFilter">
+            <option value="all">Semua</option>
+            <option value="live">Live</option>
+            <option value="upcoming">Akan Datang</option>
+            <option value="finished">Selesai</option>
+          </select>
+        </div>
+        <button onclick="fetchMatches()">🔄 Refresh Data</button>
+      </div>
+
+      <div id="loadingIndicator" class="loading" style="display: none">
+        Mengambil data dari API...
+      </div>
+
+      <div class="schedule-grid" id="scheduleGrid"></div>
+    </div>
+
+    <!-- Modal -->
+    <div id="matchModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2 id="modalTitle">Detail Pertandingan</h2>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
